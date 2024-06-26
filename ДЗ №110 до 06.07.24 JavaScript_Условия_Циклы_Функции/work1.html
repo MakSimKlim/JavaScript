@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <title>Задание 1</title>
+		<meta charset="UTF-8">
+	</head>
+		<body>
+			<script>
+				// Задание 1
+				var name = prompt("Введите ваше имя");
+				alert("Привет, " + name + "!");
+
+				// Задание 2
+				var birthYear = prompt("Введите год вашего рождения");
+				var currentYear = new Date().getFullYear();// текущий год
+				var age = currentYear - birthYear; 
+				alert("Вам " + age + " лет/год");
+
+				// Задание 3
+				var side = prompt("Введите длину стороны квадрата");
+				var perimeter = 4 * side;
+				alert("Периметр квадрата: " + perimeter);
+
+				// Задание 4
+				var radius = prompt("Введите радиус окружности");
+				var area = Math.PI * Math.pow(radius, 2);
+				alert("Площадь окружности: " + area);
+
+				// Задание 5
+				var distance = prompt("Введите расстояние в км между двумя городами");
+				var time = prompt("За сколько часов вы хотите добраться?");
+				var speed = distance / time;
+				alert("Необходимая скорость: " + speed + " км/ч");
+			</script>
+		</body>
+</html>
