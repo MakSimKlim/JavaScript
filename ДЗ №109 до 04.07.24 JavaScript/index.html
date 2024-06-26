@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <title>JavaScript - Noscript</title>
+		<meta charset="UTF-8">
+		<!--<link rel="stylesheet" href="styles.css">-->
+		<style>
+		*
+		{
+		font-size: 30px;
+		text-align: center;
+		color: green;
+		}
+		</style>
+		<noscript>
+			<style>
+				#msg
+				{
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background: grey;
+				text-align: center;
+				color: red;
+				paddint-top: 49vh;
+				}
+							
+			</style>
+		</noscript>
+	</head>
+	<body>
+		<div id="msg">Allow JavaScript to use this page properly</div>
+		<script>
+			window.msg.innerHTML = "Hello World";
+		</script>
+	</body>
+</html>
