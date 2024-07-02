@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HomeWork№111</title>		
+		<script>
+		<!--Функция, которая принимает строку и выводит статистику о ней: количество букв, количество цифр и количество других знаков-->
+		let str = "Привет, мир! 123";
+		function stringStatistics(str) 
+		{
+			let letters = 0, digits = 0, others = 0;
+
+			for (let i = 0; i < str.length; i++) 
+			{
+				if (/[a-zA-Zа-яА-Я]/.test(str[i])) 
+				{
+					letters++;
+				} 
+				else if (/[0-9]/.test(str[i])) 
+				{
+					digits++;
+				} 
+				else 
+				{
+					others++;
+				}
+			}
+
+			console.log(`Букв: ${letters}, Цифр: ${digits}, Других символов: ${others}`);
+		}
+
+		<!-- Функция, которая преобразует идентификаторы с дефисом в название в СamelСase стиле -->
+		let str2 = "font-size-upper, background-color, text-align";
+		function toCamelCase(str2) 
+		{
+			return str2.split('-').map((word, index) => 
+			{
+				if (index === 0) 
+				{
+					return word;
+				}
+				return word[0].toUpperCase() + word.slice(1);
+			}).join('');
+		}
+		let camelCaseStr = toCamelCase(str2);
+		
+
+		<!-- Функция, которая принимает словосочетание и превращает его в аббревиатуру -->
+		let str3 = "cascading style sheets";
+		function toAbbreviation(str3) 
+		{
+			return str3.split(' ').map(word => word[0].toUpperCase()).join('');
+		}
+
+		
+		</script>		
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HomeWork№111</title>		
+		<script>
+		<!--Рекурсивная функция возведения числа в степень-->
+			function factorization(base, exponent) 
+			{
+				if (exponent === 0) 
+				{
+					return 1;
+				} 
+					else 
+					{
+						return base * factorization(base, exponent - 1);
+					}
+			}
+			<!--Рекурсивная функция для поиска максимальной цифры в числе-->
+			function maxDigit(number) 
+			{
+				if (number === 0) 
+				{
+					return 0;
+				} 
+				else 
+				{
+					return Math.max(number % 10, maxDigit(Math.floor(number / 10)));
+				}
+			}
+			<!--Рекурсивная функция, которая определяет простое ли переданное число-->
+			function isPrime(number, divisor = number - 1) 
+			{
+				if (divisor === 1) 
+				{
+					return true;
+				} 
+				else if (number % divisor === 0) 
+				{
+					return false;
+				} 
+				else 
+				{
+					return isPrime(number, divisor - 1);
+				}
+			}
+		</script>		
+	</head>
+	<body>
+	</body>
+</html>

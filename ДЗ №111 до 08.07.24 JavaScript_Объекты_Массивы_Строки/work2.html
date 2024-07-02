@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HomeWork№111</title>		
+		<script>
+		<!--Создаем массив, описывающий чек в магазине-->
+		let receipt = 
+		[
+			{name: "Яблоки", quantity: 5, price: 20},
+			{name: "Бананы", quantity: 3, price: 30},
+			{name: "Апельсины", quantity: 6, price: 25}
+		];
+
+		<!-- 1. Распечатка чека на экран-->
+		function printReceipt(receipt) 
+		{
+			for (let item of receipt) 
+			{
+				console.log(`Товар: ${item.name}, Количество: ${item.quantity}, Цена: ${item.price}`);
+			}
+		}
+
+		<!-- 2. Подсчет общей суммы покупки-->
+		function totalSum(receipt) 
+		{
+			let total = 0;
+			for (let item of receipt) 
+			{
+				total += item.quantity * item.price;
+			}
+			return total;
+		}
+
+		<!-- 3. Получение самой дорогой покупки в чеке-->
+		function mostExpensivePurchase(receipt) 
+		{
+			let maxPrice = 0;
+			let expensiveItem = null;
+			for (let item of receipt) 
+			{
+				let itemPrice = item.quantity * item.price;
+				if (itemPrice > maxPrice) 
+				{
+					maxPrice = itemPrice;
+					expensiveItem = item;
+				}
+			}
+			return expensiveItem;
+		}
+
+		<!-- 4. Подсчет средней стоимости одного товара в чеке-->
+		function averageCost(receipt) 
+		{
+			let totalCost = 0;
+			let totalItems = 0;
+			for (let item of receipt) 
+			{
+				totalCost += item.quantity * item.price;
+				totalItems += item.quantity;
+			}
+			return totalCost / totalItems;
+		}
+
+		<!-- Тестирование функций-->
+		printReceipt(receipt);
+		console.log("Общая сумма покупки: " + totalSum(receipt));
+		console.log("Самая дорогая покупка: ", mostExpensivePurchase(receipt));
+		console.log("Средняя стоимость одного товара: " + averageCost(receipt));
+
+		</script>		
+	</head>
+	<body>
+	</body>
+</html>
