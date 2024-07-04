@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HW№112_Task1</title>		
+		<script>
+			let text = "To be, or not to be, that is the question...<br>";
+			let author = "~ \"Hamlet\", William Shakespeare";
+			let i = 0;
+
+			let intervalId = setInterval(function() 
+			{
+				if (i < text.length) 
+				{
+					document.write(text[i]);
+					i++;
+				} 
+				else 
+				{
+					clearInterval(intervalId);
+					document.write(author);
+				}
+			}, 250);
+		</script>		
+	</head>
+	<body>
+	</body>
+</html>

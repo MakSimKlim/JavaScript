@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <title>HW№112_Task3</title>
+		<meta charset="UTF-8">
+		<!--link rel="stylesheet" href="styles.css"-->
+	</head>
+	<body>
+        <script>
+            class HtmlElement 
+			{
+                constructor(tagName, selfClosing = false, content = '', attributes = [], styles = [], children = []) <!-- Конструктор класса, принимает параметры для инициализации объекта -->
+				{
+                    this.tagName = tagName;<!-- Название HTML тега -->
+                    this.selfClosing = selfClosing;<!-- Булево значение, указывающее, является ли тег самозакрывающимся -->
+                    this.content = content;<!-- Текстовое содержимое элемента -->
+                    this.attributes = attributes;<!-- Массив атрибутов элемента -->
+                    this.styles = styles;<!-- Массив CSS стилей элемента -->
+                    this.children = children;<!-- Массив вложенных таких же тегов -->
+                }
+
+                setAttribute(attribute, value) <!-- Метод для установки атрибута -->
+				{
+                    this.attributes.push({attribute, value});<!-- Добавляет новый атрибут в массив атрибутов -->
+                }
+
+                setStyle(property, value) <!-- Метод для установки CSS стиля -->
+				{
+                    this.styles.push({property, value});<!-- Добавляет новый стиль в массив стилей -->
+                }
+
+                appendChild(child) <!-- Метод для добавления вложенного элемента в конец текущего элемента -->
+				{
+                    this.children.push(child);
+                }
+
+                prependChild(child) <!-- Метод для добавления вложенного элемента в начало текущего элемента -->
+				{
+                    this.children.unshift(child);
+                }
+
+                getHtml() <!-- Метод, который возвращает HTML код в виде строки, включая HTML код вложенных элементов -->
+				{
+                    let attrStr = this.attributes.map(attr => ` ${attr.attribute}="${attr.value}"`).join('');<!-- Создает строку атрибутов из массива атрибутов -->
+                    let styleStr = this.styles.map(style => `${style.property}: ${style.value};`).join(' ');<!-- Создает строку стилей из массива стилей -->
+                    if (styleStr) attrStr += ` style="${styleStr}"`;<!-- Если есть стили, добавляет их в строку атрибутов -->
+
+                    let html = `<${this.tagName}${attrStr}>`;<!-- Начинает создание HTML строки -->
+
+                    if (!this.selfClosing) <!-- Если тег не самозакрывающийся... -->
+					{
+                        html += this.content;<!-- ...добавляет содержимое... -->
+                        this.children.forEach(child => <!-- ...и для каждого вложенного элемента... -->
+						{
+                            html += child.getHtml();<!-- ...добавляет его HTML код -->
+                        });
+                        html += `</${this.tagName}>`;<!-- Закрывает тег -->
+                    }
+
+                    return html;<!-- Возвращает HTML код в виде строки -->
+                }
+            }
+
+            let wrapper = new HtmlElement('div');<!-- Создает новый объект HtmlElement с тегом div -->
+            wrapper.setAttribute('id', 'wrapper');<!-- Устанавливает атрибут id -->
+            wrapper.setStyle('display', 'flex');<!-- Устанавливает CSS стиль display: flex -->
+			
+            let div1 = new HtmlElement('div');<!-- Создает новый объект HtmlElement с тегом div -->
+            div1.setStyle('width', '300px');<!-- Устанавливает CSS стиль width: 300px -->
+            div1.setStyle('margin', '10px');<!-- Устанавливает CSS стиль margin: 10px -->
+
+            let h3_1 = new HtmlElement('h3', false, 'What is Lorem Ipsum?');<!-- Создает новый объект HtmlElement с тегом h3 и текстовым содержимым 'What is Lorem Ipsum?' -->
+            div1.appendChild(h3_1);<!-- Добавляет h3_1 как вложенный элемент div1 -->
+
+            let img1 = new HtmlElement('img', true);<!-- Создает новый объект HtmlElement с тегом img, который является самозакрывающимся -->
+            img1.setAttribute('style', 'width: 100%');<!-- Устанавливает CSS стиль width: 100% -->
+            img1.setAttribute('src', 'lorem.jpg');<!-- Устанавливает атрибут src -->
+            div1.appendChild(img1);<!-- Добавляет img1 как вложенный элемент div1 -->
+
+            let p1 = new HtmlElement('p', false, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.');<!-- Создает новый объект HtmlElement с тегом p -->
+            div1.appendChild(p1);<!-- Добавляет p1 как вложенный элемент div1 -->
+
+            let a1 = new HtmlElement('a', false, 'More...');<!-- Создает новый объект HtmlElement с тегом a -->
+            a1.setAttribute('href', 'https://www.lipsum.com/');<!-- Устанавливает атрибут href -->
+            a1.setAttribute('target', '_blank');<!-- Устанавливает атрибут target -->
+            div1.appendChild(a1);<!-- Добавляет a1 как вложенный элемент div1 -->
+
+            wrapper.appendChild(div1);
+
+            let div2 = new HtmlElement('div');
+            div2.setStyle('width', '300px');
+            div2.setStyle('margin', '10px');
+
+            let h3_2 = new HtmlElement('h3', false, 'What is Lorem Ipsum?');
+            div2.appendChild(h3_2);
+
+            let img2 = new HtmlElement('img', true);
+            img2.setAttribute('style', 'width: 100%');
+            img2.setAttribute('src', 'lorem.jpg');
+            div2.appendChild(img2);
+
+            let p2 = new HtmlElement('p', false, '"Lorem Ipsum" is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the late middle ages when someone took a gallery of type and scrambled it to make a type specimen book.');<!-- Создает новый объект HtmlElement с тегом p и текстовым содержимым -->
+            p2.setStyle('text-align', 'justify');<!-- Устанавливает CSS стиль text-align: justify для p2 -->
+            div2.appendChild(p2);<!-- Добавляет p2 как вложенный элемент div2 -->
+
+            let a2 = new HtmlElement('a', false, 'More...');<!-- Создает новый объект HtmlElement с тегом a и текстовым содержимым -->
+            a2.setAttribute('href', 'https://www.lipsum.com/');<!-- Устанавливает атрибут href -->
+            a2.setAttribute('target', '_blank');<!-- Устанавливает атрибут target -->
+            div2.appendChild(a2);<!-- Добавляет a2 как вложенный элемент div2 -->
+
+            wrapper.appendChild(div2);<!-- Добавляет div2 как вложенный элемент wrapper -->
+
+            document.write(wrapper.getHtml());<!-- Выводит HTML код wrapper (и всех его вложенных элементов) на страницу -->
+        </script>
+	</body>
+</html>

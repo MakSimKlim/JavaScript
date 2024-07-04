@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HW№112_Task2</title>		
+		<script>
+		class Circle 
+		{
+			constructor(radius) 
+			{
+				this._radius = radius;
+			}
+
+    // get-свойство, возвращающее радиус окружности
+			get radius() 
+			{
+				return this._radius;
+			}
+
+    // set-свойство, устанавливающее радиус окружности
+			set radius(newRadius) 
+			{
+				this._radius = newRadius;
+			}
+
+    // get-свойство, возвращающее диаметр окружности
+			get diameter() 
+			{
+				return this._radius * 2;
+			}
+
+    // метод, вычисляющий площадь окружности
+			area() 
+			{
+				return Math.PI * this._radius * this._radius;
+			}
+
+    // метод, вычисляющий длину окружности
+			circumference() 
+			{
+				return 2 * Math.PI * this._radius;
+			}
+		}
+
+	// Продемонстрировать работу свойств и методов
+		let myCircle = new Circle(5);
+		console.log(myCircle.radius); // Выводит: 5
+		myCircle.radius = 10;
+		console.log(myCircle.radius); // Выводит: 10
+		console.log(myCircle.diameter); // Выводит: 20
+		console.log(myCircle.area()); // Выводит: 314.1592653589793
+		console.log(myCircle.circumference()); // Выводит: 62.83185307179586
+
+
+		</script>		
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,16 @@
+<div id="wrapper" style="display: flex;">
+  <div style="width: 300px; margin: 10px;">
+    <h3>What is Lorem Ipsum?</h3>
+    <img style="width: 100%" src="lorem.jpg">
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+    <a href="https://www.lipsum.com/" target="_blank">More...</a>
+  </div>
+</div>
+<div style="width: 300px; margin: 10px;">
+  <h3>What is Lorem Ipsum?</h3>
+  <img style="width: 100%" src="lorem.jpg">
+  <p style="text-align: justify;">
+    "Lorem Ipsum" is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the late middle ages when someone took a gallery of type and scrambled it to make a type specimen book.
+   </p>
+   <a href="https://www.lipsum.com/" target="_blank">More...</a>
+</div>
