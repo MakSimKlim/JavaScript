@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW№113_Task1_Модальное окно</title>
+    <style>
+        /* Стили для модального окна */
+        .modal 
+		{
+            display: none; /* Изначально окно не отображается */
+            position: fixed; /* Фиксированное позиционирование */
+            z-index: 1; /* Находится поверх всего остального контента */
+            left: 0;
+            top: 0;
+            width: 100%; /* Полная ширина */
+            height: 100%; /* Полная высота */
+            overflow: auto; /* Включить прокрутку, если необходимо */
+            background-color: rgb(0,0,0); /* Черный фон с прозрачностью */
+            background-color: rgba(0,0,0,0.4); /* Прозрачность */
+        }
+
+         /* Стили для содержимого модального окна */
+        .modal-content {
+            background-color: #add8e6; /* Светло-синий фон */
+            margin: 15% auto; /* 15% от верхнего края и центрировано */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%; /* Ширина содержимого */
+            text-align: center; /* Выравнивание текста  и кнопки по центру */
+			font-size: 25px;
+			font-family: sans-serif;
+			
+        }
+
+        /* Стили для кнопки "Закрыть" */
+		.close-button 
+		{
+			background-color: #d3d3d3; /* Серый фон */
+			color: black; /* Черный текст */
+			padding: 10px 20px; /* Отступы вокруг текста */
+			margin-top: 20px; /* Отступ сверху */
+			cursor: pointer; /* Курсор в виде руки при наведении */
+			width: 90% !important; /* Ширина кнопки - 90% от ширины родительского элемента */
+			display: block; /* Блочное отображение, чтобы ширина применялась корректно */
+			margin-left: auto; /* Автоматический отступ слева */
+			margin-right: auto; /* Автоматический отступ справа */
+			border-radius: 0 !important; /* Углы кнопки без скругления */
+			font-size: 15px;
+		}
+
+    </style>
+</head>
+<body>
+
+<button id="openBtn">Open modal</button> <!-- Кнопка для открытия модального окна -->
+
+<!-- Модальное окно -->
+<div id="myModal" class="modal">
+
+  <!-- Содержимое модального окна -->
+  <div class="modal-content">
+    <p>Hello from Modal Window!</p>
+    <button id="closeBtn" class="close-button">Close</button> <!-- Кнопка для закрытия модального окна -->
+  </div>
+
+</div>
+
+<script>
+// Получаем модальное окно
+var modal = document.getElementById("myModal");
+
+// Получаем кнопку, которая открывает модальное окно
+var btn = document.getElementById("openBtn");
+
+// Получаем элемент <span>, который закрывает модальное окно
+var span = document.getElementById("closeBtn");
+
+// Когда пользователь нажимает на кнопку, открываем модальное окно 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// Когда пользователь нажимает на Close, закрываем модальное окно
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// Когда пользователь кликает в любом месте за пределами модального окна, закрываем его
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>

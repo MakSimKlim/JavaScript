@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <title>HW№113_Task2_Список книг</title>
+		<meta charset="UTF-8">
+		 <style>
+        .book 
+		{
+            background-color: pink;
+            padding: 10px;
+        }
+		</style>
+	</head>
+	<body>
+    <div class="book">"1.JavaScript for Kids: A Playful Introduction to Programming" by Nick Morgan</div>
+    <div class="book">"2.Eloquent JavaScript: A Modern Introduction to Programming" by Marijn Haverbeke</div>
+    <div class="book">"3.JavaScript: The Good Parts" by Douglas Crockford</div>
+    <div class="book">"4.Programming JavaScript Applications: Robust Web Architecture with Node, HTML5, and Modern JS Libraries" by Eric Elliott</div>
+    <div class="book">"5.Effective JavaScript: 68 Specific Ways to Harness the Power of JavaScript" by David Herman</div>
+    <div class="book">"6.JavaScript: The Definitive Guide" by David Flanagan</div>
+	<div class="book">"7.You Don't Know JS" by Kyle Simpson</div>
+
+    <script>
+        let selectedBook = null;
+        let originalColor = null;
+
+        document.querySelectorAll('.book').forEach(book => {
+            book.addEventListener('click', function() {
+                if (selectedBook) {
+                    selectedBook.style.backgroundColor = originalColor;
+                }
+                originalColor = this.style.backgroundColor;
+                this.style.backgroundColor = 'orange';
+                selectedBook = this;
+            });
+        });
+    </script>
+</body>
+</html>

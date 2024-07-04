@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HW№113_Task2_Футбольное поле</title>		
+<style>
+        /* Стили для футбольного поля */
+        #field {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+			background-image: url('Field.jpg');
+			background-repeat: no-repeat;
+			background-size: 100% 100%;/*футбольное поле, которое занимает всю ширину и высоту экрана*/
+        }
+
+        /* Стили для мяча */
+        #ball {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background: red;
+            border-radius: 50%;
+            transition: top 0.5s, left 0.5s; /* Плавное перемещение мяча */
+			background-image: url('Ball.png');
+			background-repeat: no-repeat;
+			background-size: cover;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Футбольное поле -->
+<div id="field">
+    <!-- Мяч -->
+    <div id="ball"></div>
+</div>
+
+<script>
+// Получаем футбольное поле и мяч
+var field = document.getElementById('field');
+var ball = document.getElementById('ball');
+
+// При клике по полю...
+field.onclick = function(event) {
+    // Вычисляем новые координаты мяча
+    var x = event.clientX - field.offsetLeft - ball.offsetWidth / 2;
+    var y = event.clientY - field.offsetTop - ball.offsetHeight / 2;
+
+    // Проверяем, чтобы мяч не выходил за границы поля
+    if (x < 0) x = 0;
+    if (x > field.clientWidth - ball.offsetWidth) x = field.clientWidth - ball.offsetWidth;
+    if (y < 0) y = 0;
+    if (y > field.clientHeight - ball.offsetHeight) y = field.clientHeight - ball.offsetHeight;
+
+    // Перемещаем мяч на новые координаты
+    ball.style.left = x + 'px';
+    ball.style.top = y + 'px';
+}
+</script>
+	</body>
+</html>
