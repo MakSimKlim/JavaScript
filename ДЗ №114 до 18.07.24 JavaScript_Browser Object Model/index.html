@@ -1,0 +1,34 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> <!-- Устанавливает кодировку символов документа -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Настраивает окно просмотра для адаптивного дизайна -->
+    <title>Browser Object Model</title> 
+	
+    <link rel="stylesheet" href="styles.css"> <!-- Подключаем внешний CSS файл -->
+	
+</head>
+<body> <!-- Начало тела документа -->
+
+    <!-- Контейнер для кнопок -->
+    <div class="container">
+        <!-- Первая невидимая кнопка-заполнитель для выравнивания -->
+        <button class="spacer"></button>
+        <!-- Вторая кнопка с подсказкой и переходом вперед по истории -->
+        <button onclick="goForward()" class="tooltip-button" data-tooltip="Tooltip for Button 2">
+            Button 2
+            <span class="tooltip tooltip-top">Tool tip 2</span> <!-- Всплывающая подсказка для Button 2 -->
+        </button>
+        <!-- Первая кнопка с подсказкой и переходом назад по истории -->
+        <button onclick="goBack()" class="tooltip-button" data-tooltip="Tooltip for Button 1">
+            Button 1
+            <span class="tooltip tooltip-top">Tool tip 1</span> <!-- Всплывающая подсказка для Button 1 -->
+        </button>
+        <!-- Вторая невидимая кнопка-заполнитель для выравнивания -->
+        <button class="spacer"></button>
+    </div>
+
+    <script src="script.js"></script> <!-- Подключаем внешний JavaScript файл -->
+
+</body>
+</html> 
