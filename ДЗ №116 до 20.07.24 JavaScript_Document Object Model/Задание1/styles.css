@@ -1,0 +1,14 @@
+ /* Начальные стили */
+        body {
+            background-color: #FFEFD5;
+            font-family: sans-serif;
+        }
+        ul {
+            list-style-type: none;
+        }
+        li {
+            margin: 5px 0;
+        }
+        a {
+            text-decoration: none;
+        }
