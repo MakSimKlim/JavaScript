@@ -5,60 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forum Page</title>
     <style>
+        /* Стили для всей страницы */
         body {
-            font-family: Arial, sans-serif;
+            background-color: #FFEFD5; /* Цвет фона страницы */
+            font-family: Arial, sans-serif; /* Шрифт текста */
         }
         .forum-container {
-            width: 50%;
-            margin: 0 auto;
+            width: 50%; /* Ширина контейнера сообщений */
+            margin: 0 auto; /* Центрирование контейнера по горизонтали */
         }
         .message {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
+            border: 1px solid #ccc; /* Граница блока сообщения */
+            padding: 10px; /* Внутренний отступ */
+            margin-bottom: 10px; /* Отступ снизу */
         }
         .message .timestamp {
-            font-size: 0.9em;
-            color: #666;
+            font-size: 0.9em; /* Размер шрифта времени */
+            color: #666; /* Цвет времени */
+            text-align: right; /* Выравнивание времени по правому краю */
         }
         .message-form {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-top: 10px;
+            border: 1px solid #ccc; /* Граница формы ввода сообщения */
+            padding: 10px; /* Внутренний отступ */
+            margin-top: 10px; /* Отступ сверху */
         }
         .message-form input[type="text"],
         .message-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            width: 85%; /* Ширина полей ввода имени и сообщения */
+            padding: 10px; /* Внутренний отступ */
+            margin-top: 5px; /* Отступ сверху */
+            margin-bottom: 10px; /* Отступ снизу */
+            border: 1px solid #ccc; /* Граница полей ввода */
+            border-radius: 4px; /* Скругление углов */
         }
         .message-form input[type="button"] {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            padding: 10px 20px; /* Внутренний отступ кнопки */
+            background-color: #A9A9A9; /* Цвет кнопки */
+            color: #000000; /* Цвет текста на кнопке */
+            border: none; /* Убираем границу кнопки */
+            border-radius: 4px; /* Скругление углов кнопки */
+            cursor: pointer; /* Курсор при наведении на кнопку */
+            width: 100%; /* Ширина кнопки */
+            height: 25px; /* Высота кнопки */
+            padding: 2px; /* Внутренний отступ */
         }
         .message-form input[type="button"]:hover {
-            background-color: #45a049;
+            background-color: #000000; /* Цвет кнопки при наведении */
+            color: #FFFFFF; /* Цвет текста на кнопке при наведении */
+            width: 100%; /* Ширина кнопки при наведении */
+            height: 25px; /* Высота кнопки при наведении */
+            padding: 2px; /* Внутренний отступ при наведении */
+        }
+        hr {
+            border: none; /* Убираем границу линии разделителя */
+            border-top: 1px solid #ccc; /* Линия разделителя сверху */
+            margin: 10px 0; /* Отступ сверху и снизу линии разделителя */
         }
     </style>
 </head>
 <body>
 
 <div class="forum-container">
+    <!-- Блок сообщения -->
     <div class="message">
-        <div class="timestamp">10:05:00 22.03.2018</div>
+        <div class="name">Name</div> <!-- Имя пользователя -->
+        <div class="timestamp">10:05:00 22.03.2018</div> <!-- Временная метка -->
+        <hr> <!-- Линия разделителя -->
         <div class="content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</div>
     </div>
 
     <div class="message-form">
         <label for="name">Your name:</label>
-        <input type="text" id="name" name="name">
+        <input type="text" id="name" name="name"><br>
         
         <label for="message">Your message:</label>
         <textarea id="message" name="message"></textarea>
