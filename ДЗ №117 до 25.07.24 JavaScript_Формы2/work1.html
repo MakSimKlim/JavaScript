@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .forum-container {
+            width: 50%;
+            margin: 0 auto;
+        }
+        .message {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .message .timestamp {
+            font-size: 0.9em;
+            color: #666;
+        }
+        .message-form {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .message-form input[type="text"],
+        .message-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .message-form input[type="button"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .message-form input[type="button"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="forum-container">
+    <div class="message">
+        <div class="timestamp">10:05:00 22.03.2018</div>
+        <div class="content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</div>
+    </div>
+
+    <div class="message-form">
+        <label for="name">Your name:</label>
+        <input type="text" id="name" name="name">
+        
+        <label for="message">Your message:</label>
+        <textarea id="message" name="message"></textarea>
+        
+        <input type="button" value="Send" onclick="addMessage()">
+    </div>
+</div>
+
+<script>
+    function addMessage() {
+        // Get the name and message values
+        var name = document.getElementById('name').value;
+        var message = document.getElementById('message').value;
+
+        // Check if both fields are filled
+        if (name === '' || message === '') {
+            alert('Please fill out both fields.');
+            return;
+        }
+
+        // Get the current date and time
+        var now = new Date();
+        var timestamp = now.toLocaleTimeString() + ' ' + now.toLocaleDateString();
+
+        // Create a new message element
+        var newMessage = document.createElement('div');
+        newMessage.className = 'message';
+        
+        var timestampDiv = document.createElement('div');
+        timestampDiv.className = 'timestamp';
+        timestampDiv.textContent = timestamp;
+        
+        var contentDiv = document.createElement('div');
+        contentDiv.className = 'content';
+        contentDiv.innerHTML = '<strong>' + name + ':</strong> ' + message;
+        
+        newMessage.appendChild(timestampDiv);
+        newMessage.appendChild(contentDiv);
+
+        // Append the new message to the forum container
+        var forumContainer = document.querySelector('.forum-container');
+        forumContainer.insertBefore(newMessage, document.querySelector('.message-form'));
+
+        // Clear the form fields
+        document.getElementById('name').value = '';
+        document.getElementById('message').value = '';
+    }
+</script>
+
+</body>
+</html>
