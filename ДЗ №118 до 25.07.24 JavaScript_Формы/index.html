@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Календарь</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Генератор календаря</h1>
+    <label for="month">Месяц:</label>
+    <input type="number" id="month" min="1" max="12">
+    <label for="year">Год:</label>
+    <input type="number" id="year" min="1900" max="2100">
+    <button id="generate">Сгенерировать</button>
+    <div id="calendar"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#generate').click(function() {
+                var month = $('#month').val();
+                var year = $('#year').val();
+                if (month && year) {
+                    generateCalendar(month, year);
+                } else {
+                    alert('Пожалуйста, введите месяц и год.');
+                }
+            });
+
+            function generateCalendar(month, year) {
+                var daysInMonth = new Date(year, month, 0).getDate();
+                var firstDay = new Date(year, month - 1, 1).getDay();
+                var calendar = '<table><tr><th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th></tr><tr>';
+                var dayOfWeek = (firstDay === 0) ? 6 : firstDay - 1;
+
+                for (var i = 0; i < dayOfWeek; i++) {
+                    calendar += '<td></td>';
+                }
+
+                for (var day = 1; day <= daysInMonth; day++) {
+                    if (dayOfWeek === 7) {
+                        calendar += '</tr><tr>';
+                        dayOfWeek = 0;
+                    }
+                    calendar += '<td>' + day + '</td>';
+                    dayOfWeek++;
+                }
+
+                while (dayOfWeek < 7) {
+                    calendar += '<td></td>';
+                    dayOfWeek++;
+                }
+
+                calendar += '</tr></table>';
+                $('#calendar').html(calendar);
+            }
+        });
+    </script>
+</body>
+</html>
