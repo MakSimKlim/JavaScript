@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Palette</title>
+    <style>
+        body {
+    background-color: #FAEBD7;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+    padding-top: 20px;
+    font-family: sans-serif;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+}
+
+.error {
+    color: red;
+    font-size: 0.875em;
+    margin-bottom: 5px;
+    text-align: right;
+}
+
+.form-field {
+    width: 100%;
+    max-width: 500px;
+    margin: 10px auto;
+    text-align: left;
+}
+
+.form-field input, .form-field select, .form-field button {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.form-field label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#color-list {
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 10px; 
+    padding-top: 20px;
+}
+
+.color-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px; /* Ширина более вытянутая по горизонтали */
+    height: 100px; /* Меньшая высота */
+    padding: 0; /* Убираем padding */
+    color: black;
+    text-align: center;№аааааа
+    box-sizing: border-box;
+    flex-direction: column;
+    position: relative; /* Для позиционирования полупрозрачного фона */
+    background-clip: content-box;
+}
+
+.color-info {
+    background-color: rgba(255, 255, 255, 0.7); /* Полупрозрачный белый фон */
+    padding: 10px;
+    box-sizing: border-box;
+    width: 70%; /* Фон немного меньше по ширине */
+    height: 70%; /* Фон немного меньше по высоте */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+.color-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.color-type {
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.color-code {
+    font-size: 1em;
+    font-family: monospace;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>Create new color</h1>
+    <form id="color-form">
+        <div class="form-field">
+            <label for="name">Color:</label>
+            <span id="name-error" class="error"></span>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-field">
+            <label for="type">Type:</label>
+            <select id="type" name="type">
+                <option value="RGB">RGB</option>
+                <option value="RGBA">RGBA</option>
+                <option value="HEX">HEX</option>
+            </select>
+        </div>
+        <div class="form-field">
+            <label for="code">Code:</label>
+            <span id="code-error" class="error"></span>
+            <input type="text" id="code" name="code" required>
+        </div>
+        <div class="form-field">
+            <button type="button" onclick="saveColor()">Save</button>
+        </div>
+    </form>
+    <h2>All colors</h2>
+    <div id="color-list"></div>
+</div>
+
+
+<script>
+    const colors = JSON.parse(getCookie('colors') || '[]');
+    displayColors();
+
+    function saveColor() {
+        const name = document.getElementById('name').value.trim();
+        const type = document.getElementById('type').value;
+        const code = document.getElementById('code').value.trim();
+        const nameError = document.getElementById('name-error');
+        const codeError = document.getElementById('code-error');
+        nameError.textContent = '';
+        codeError.textContent = '';
+
+        if (!/^[a-zA-Z]+$/.test(name)) {
+            nameError.textContent = 'Color can only contain letters';
+            return;
+        }
+        
+        if (colors.some(color => color.name.toLowerCase() === name.toLowerCase())) {
+            nameError.textContent = 'Name must be unique';
+            return;
+        }
+
+        let isValidCode = false;
+        if (type === 'RGB') {
+            isValidCode = /^(\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})$/.test(code) && code.split(',').every(num => num >= 0 && num <= 255);
+            if (!isValidCode) {
+                codeError.textContent = 'RGB code must match the pattern [0-255], [0-255], [0-255]';
+            }
+        } else if (type === 'RGBA') {
+            isValidCode = /^(\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),\s*(0|1|0\.\d+)$/.test(code) && code.split(',').slice(0, 3).every(num => num >= 0 && num <= 255);
+            if (!isValidCode) {
+                codeError.textContent = 'RGBA code must match the pattern [0-255], [0-255], [0-255], [0-1]';
+            }
+        } else if (type === 'HEX') {
+            isValidCode = /^#[0-9A-Fa-f]{6}$/.test(code);
+            if (!isValidCode) {
+                codeError.textContent = 'HEX code must match the pattern #RRGGBB';
+            }
+        }
+
+        if (!isValidCode) {
+            return;
+        }
+
+        colors.push({ name, type, code });
+        setCookie('colors', JSON.stringify(colors), 3);
+        displayColors();
+        document.getElementById('color-form').reset();
+    }
+
+    function displayColors() {
+    const colorList = document.getElementById('color-list');
+    colorList.innerHTML = '';
+    colors.forEach(color => {
+        const colorCard = document.createElement('div');
+        colorCard.className = 'color-card';
+        colorCard.style.backgroundColor = color.type === 'HEX' ? color.code : `${color.type.toLowerCase()}(${color.code})`;
+
+        const colorInfo = document.createElement('div');
+        colorInfo.className = 'color-info';
+
+        const colorName = document.createElement('div');
+        colorName.className = 'color-name';
+        colorName.textContent = color.name.toUpperCase();
+
+        const colorType = document.createElement('div');
+        colorType.className = 'color-type';
+        colorType.textContent = color.type;
+
+        const colorCode = document.createElement('div');
+        colorCode.className = 'color-code';
+        colorCode.textContent = color.code;
+
+        colorInfo.appendChild(colorName);
+        colorInfo.appendChild(colorType);
+        colorInfo.appendChild(colorCode);
+        colorCard.appendChild(colorInfo);
+
+        colorList.appendChild(colorCard);
+    });
+}
+
+    function setCookie(name, value, hours) {
+        const date = new Date();
+        date.setTime(date.getTime() + (hours * 60 * 60 * 1000));
+        document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
+    }
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+</script>
+</body>
+</html>
