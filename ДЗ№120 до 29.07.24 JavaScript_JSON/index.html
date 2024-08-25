@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Block Manager</title>
+    <style>
+        body {
+            position: relative;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        #block-container {
+            position: relative;
+            height: 500px;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Block Manager</h1>
+
+    <textarea id="json-input" placeholder="Enter JSON here..."></textarea>
+    <button id="add-block">Add Block</button>
+    <button id="show-blocks">Show Blocks</button>
+
+    <div id="block-container"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        class Block {
+            constructor(color, width, height, top, left) {
+                this.color = color;
+                this.width = width;
+                this.height = height;
+                this.top = top;
+                this.left = left;
+            }
+
+            toHTML() {
+                return `
+                    <div style="
+                        background-color: ${this.color};
+                        width: ${this.width}px;
+                        height: ${this.height}px;
+                        position: absolute;
+                        top: ${this.top}px;
+                        left: ${this.left}px;
+                        border: 1px solid #000;
+                    "></div>
+                `;
+            }
+        }
+
+        const blocks = [];
+
+        $(document).ready(function() {
+            $('#add-block').on('click', function() {
+                try {
+                    const jsonString = $('#json-input').val();
+                    const jsonObject = JSON.parse(jsonString);
+
+                    // Create a new Block instance and add to array
+                    const block = new Block(
+                        jsonObject.color,
+                        jsonObject.width,
+                        jsonObject.height,
+                        jsonObject.top,
+                        jsonObject.left
+                    );
+
+                    blocks.push(block);
+                    alert('Block added successfully!');
+                } catch (e) {
+                    alert('Invalid JSON');
+                }
+            });
+
+            $('#show-blocks').on('click', function() {
+                $('#block-container').empty();
+                blocks.forEach(block => {
+                    $('#block-container').append(block.toHTML());
+                });
+            });
+        });
+    </script>
+</body>
+</html>

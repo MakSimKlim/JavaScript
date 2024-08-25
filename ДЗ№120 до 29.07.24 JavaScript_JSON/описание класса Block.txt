@@ -1,0 +1,23 @@
+class Block {
+    constructor(color, width, height, top, left) {
+        this.color = color;
+        this.width = width;
+        this.height = height;
+        this.top = top;
+        this.left = left;
+    }
+
+    toHTML() {
+        return `
+            <div style="
+                background-color: ${this.color};
+                width: ${this.width}px;
+                height: ${this.height}px;
+                position: absolute;
+                top: ${this.top}px;
+                left: ${this.left}px;
+                border: 1px solid #000;
+            "></div>
+        `;
+    }
+}
